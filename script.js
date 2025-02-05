@@ -183,3 +183,32 @@ document.addEventListener("DOMContentLoaded", () => {
     form.reset();
   });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const projectCards = document.querySelectorAll(".glow-card");
+
+  // Fungsi untuk memeriksa apakah elemen berada dalam viewport
+  function isInViewport(element) {
+    const rect = element.getBoundingClientRect();
+    return (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <=
+        (window.innerHeight || document.documentElement.clientHeight) &&
+      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+  }
+
+  // Fungsi untuk menambahkan efek glow saat elemen masuk ke viewport
+  function checkScroll() {
+    projectCards.forEach((card) => {
+      if (isInViewport(card)) {
+        card.classList.add("glow-active"); // Tambahkan kelas untuk aktivasi glow
+      }
+    });
+  }
+
+  // Jalankan fungsi saat halaman dimuat dan saat pengguna menggulir
+  window.addEventListener("scroll", checkScroll);
+  window.addEventListener("load", checkScroll); // Pastikan animasi bekerja saat halaman pertama kali dimuat
+});
