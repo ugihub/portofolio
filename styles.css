@@ -107,11 +107,11 @@ nav a:hover {
     top: 80px;
     right: 0;
     flex-direction: column;
-    backdrop-filter: blur(10px); /* Efek blur */
+    backdrop-filter: blur(20px); /* Efek blur */
     background: rgba(0, 0, 0, 0.8);
     padding: 20px;
     border-radius: 10px;
-    transform: translateX(100%);
+    transform: translateX(200%);
     transition: transform 0.3s ease;
   }
 
