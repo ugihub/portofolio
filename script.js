@@ -212,3 +212,34 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("scroll", checkScroll);
   window.addEventListener("load", checkScroll); // Pastikan animasi bekerja saat halaman pertama kali dimuat
 });
+
+// Skill Card Animation
+document.addEventListener("DOMContentLoaded", () => {
+  const skillCards = document.querySelectorAll(".skill-card");
+
+  skillCards.forEach((card) => {
+    card.addEventListener("click", () => {
+      // Trigger roll animation
+      card.classList.add("animate-roll");
+
+      // Remove animation class after animation ends
+      setTimeout(() => {
+        card.classList.remove("animate-roll");
+      }, 800);
+
+      // Toggle the clicked state
+      card.classList.toggle("clicked");
+
+      // Toggle the description visibility
+      const description = card.querySelector(".description");
+
+      description.classList.toggle("visible");
+
+      if (description.classList.contains("visible")) {
+        defaultText.classList.add("hidden");
+      } else {
+        defaultText.classList.remove("hidden");
+      }
+    });
+  });
+});
