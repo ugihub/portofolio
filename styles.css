@@ -132,7 +132,6 @@ nav a:hover {
 .hero {
   height: 100vh;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -141,6 +140,13 @@ nav a:hover {
   /* Needed for absolute positioning of feathers */
   overflow: hidden;
   /* Prevent feathers from overflowing */
+}
+
+.hero-content {
+  max-width: 600px;
+  z-index: 1; /* Ensure text stays above background decorations */
+  text-align: start;
+  margin-left: 2em;
 }
 
 .hero h1 {
@@ -165,26 +171,6 @@ nav a:hover {
   /* Ensure text stays above feathers */
 }
 
-/* styles.css */
-#typing-text {
-  overflow: hidden; /* Sembunyikan teks yang belum muncul */
-  border-right: 0.15em solid #fff; /* Cursor simulasi */
-  white-space: nowrap; /* Pastikan teks tidak pindah baris */
-  margin: 0 auto; /* Pusatkan teks */
-  letter-spacing: 0.15em; /* Spasi antar huruf */
-}
-
-/* Animasi kedipan cursor */
-@keyframes blink-caret {
-  from,
-  to {
-    border-color: transparent;
-  }
-  50% {
-    border-color: #fff;
-  }
-}
-
 .hero-image img {
   width: 400px;
   border-radius: 20px;
@@ -194,17 +180,6 @@ nav a:hover {
 
 .hero-image img:hover {
   transform: scale(1.05);
-}
-
-/* Animasi kedipan cursor */
-@keyframes blink-caret {
-  from,
-  to {
-    border-color: transparent;
-  }
-  50% {
-    border-color: #fff;
-  }
 }
 
 .cta-button {
