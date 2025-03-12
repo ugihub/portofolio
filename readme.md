@@ -11,3 +11,4 @@ This is a personal portfolio website showcasing projects, skills, experiences, a
 
 ## Contact
 - **Github**: https://github.com/ugihub
+- **LinkedIn**: www.linkedin.com/in/ugisugimanr
