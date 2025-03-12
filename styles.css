@@ -201,6 +201,30 @@ nav a:hover {
   transform: scale(1.1);
 }
 
+/* Efek Typing dengan Cursor */
+#typing-text {
+  display: inline-block;
+  border-right: 2px solid var(--text-color); /* Tambahkan cursor garis vertikal */
+  white-space: nowrap; /* Pastikan teks tetap pada satu baris */
+  overflow: hidden; /* Sembunyikan teks yang belum muncul */
+  letter-spacing: 0.1em;
+}
+
+.typing-active {
+  animation: blink-caret 0.7s step-end infinite; /* Animasi kedipan cursor */
+}
+
+/* Animasi Kedipan Cursor */
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: var(--text-color);
+  }
+}
+
 /* Styling for Photo */
 .photo-container {
   position: relative;

@@ -8,22 +8,32 @@ burger.addEventListener("click", () => {
 
 // Daftar teks yang akan ditampilkan
 const texts = [
-  "First-year student exploring programming and web development.",
+  "First-year student exploring programming.",
   "Building logic and creating with Greenfoot and websites.",
   "Passionate about learning and growing with code.",
   "Blending creativity and logic through technology.",
 ];
 
-// Fungsi untuk membuat efek ketik
+// Elemen tempat teks akan ditampilkan
+const typingText = document.getElementById("typing-text");
+
+// Kecepatan ketik dan hapus (ms)
+const typingSpeed = 100; // Kecepatan mengetik
+const deletingSpeed = 50; // Kecepatan hapus
+let currentIndex = 0; // Indeks teks yang sedang ditampilkan
+
+// Fungsi untuk membuat efek ketik dengan cursor mengikuti
 function typeWriter(text, element, speed, callback) {
   let i = 0;
+  element.textContent = ""; // Kosongkan teks sebelumnya sebelum mengetik
+  element.classList.add("typing-active"); // Tambahkan animasi cursor
   const interval = setInterval(() => {
     if (i < text.length) {
       element.textContent += text.charAt(i);
       i++;
     } else {
       clearInterval(interval); // Hentikan interval setelah selesai
-      setTimeout(callback, 1500); // Tunggu 1.5 detik sebelum menjalankan callback
+      setTimeout(callback, 1500); // Tunggu 1.5 detik sebelum callback
     }
   }, speed);
 }
@@ -32,39 +42,34 @@ function typeWriter(text, element, speed, callback) {
 function deleteText(element, speed, callback) {
   const text = element.textContent;
   let i = text.length;
+  element.classList.add("typing-active"); // Tetap gunakan cursor saat menghapus
   const interval = setInterval(() => {
     if (i > 0) {
       element.textContent = text.substring(0, i - 1);
       i--;
     } else {
       clearInterval(interval); // Hentikan interval setelah teks dihapus
-      callback(); // Panggil callback untuk menulis teks berikutnya
+      element.classList.remove("typing-active"); // Hapus animasi cursor
+      callback(); // Panggil callback untuk teks berikutnya
     }
   }, speed);
 }
 
-// Fungsi utama untuk mengelola pergantian teks
-function rotateTexts(index) {
-  const textElement = document.getElementById("typing-text");
-  const currentText = texts[index];
-
-  // Efek pengetikan
-  typeWriter(currentText, textElement, 80, () => {
-    // Kecepatan dikurangi menjadi 80ms
-    // Setelah selesai mengetik, hapus teks
-    deleteText(textElement, 40, () => {
-      // Kecepatan backspace 40ms
-      // Pindah ke teks berikutnya
-      const nextIndex = (index + 1) % texts.length; // Loop kembali ke awal jika sudah di akhir
-      rotateTexts(nextIndex);
-    });
+// Looping efek ketik dan hapus teks
+function startTyping() {
+  typeWriter(texts[currentIndex], typingText, typingSpeed, () => {
+    setTimeout(() => {
+      deleteText(typingText, deletingSpeed, () => {
+        // Ganti ke teks berikutnya
+        currentIndex = (currentIndex + 1) % texts.length; // Loop kembali ke awal
+        startTyping(); // Panggil ulang fungsi untuk teks berikutnya
+      });
+    }, 1500); // Waktu jeda setelah teks selesai diketik
   });
 }
 
-// Inisialisasi pergantian teks saat halaman dimuat
-document.addEventListener("DOMContentLoaded", () => {
-  rotateTexts(0); // Mulai dari teks pertama
-});
+// Mulai efek ketik
+startTyping();
 
 // Intersection Observer for Fade-In Animation
 document.addEventListener("DOMContentLoaded", () => {
@@ -142,9 +147,8 @@ heroSection.addEventListener("mousemove", (e) => {
     const maxDistance = 300; // Maximum distance for interaction effect
     const strength = Math.min(distance / maxDistance, 1);
 
-    feather.style.transform = `translate(${deltaX * strength * 0.1}px, ${
-      deltaY * strength * 0.1
-    }px)`;
+    feather.style.transform = `translate(${deltaX * strength * 0.1}px, ${deltaY * strength * 0.1
+      }px)`;
   });
 });
 
@@ -194,7 +198,7 @@ document.addEventListener("DOMContentLoaded", () => {
       rect.top >= 0 &&
       rect.left >= 0 &&
       rect.bottom <=
-        (window.innerHeight || document.documentElement.clientHeight) &&
+      (window.innerHeight || document.documentElement.clientHeight) &&
       rect.right <= (window.innerWidth || document.documentElement.clientWidth)
     );
   }
