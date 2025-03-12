@@ -182,30 +182,11 @@ nav a:hover {
   transform: scale(1.5);
 }
 
-.cta-button {
-  padding: 15px 30px;
-  background: var(--accent-color);
-  color: var(--text-color);
-  border: none;
-  border-radius: 5px;
-  font-size: 18px;
-  cursor: pointer;
-  transition: transform 0.3s ease, background 0.3s ease;
-  z-index: 1;
-  margin-top: 20px;
-  /* Ensure button stays above feathers */
-}
-
-.cta-button:hover {
-  background: var(--secondary-accent);
-  transform: scale(1.1);
-}
-
 /* Efek Typing dengan Cursor */
 #typing-text {
-  display: inline-block;
+  display: inline; /* Pastikan teks mengambil seluruh baris */
   border-right: 2px solid var(--text-color); /* Tambahkan cursor garis vertikal */
-  white-space: nowrap; /* Pastikan teks tetap pada satu baris */
+  white-space: normal; /* Izinkan teks berpindah baris */
   overflow: hidden; /* Sembunyikan teks yang belum muncul */
   letter-spacing: 0.1em;
 }
@@ -303,9 +284,10 @@ nav a:hover {
     margin-bottom: 30px;
   }
 
-  .cta-button {
-    font-size: 16px; /* Kurangi ukuran font */
-    padding: 10px 20px; /* Atur ulang padding */
+  #typing-text {
+    text-align: center; /* Pastikan tetap di tengah */
+    white-space: normal; /* Izinkan teks berpindah baris */
+    padding-left: 50px; /* Atur padding agar tidak terlalu lebar */
   }
 }
 
@@ -339,6 +321,14 @@ nav a:hover {
   .cta-button {
     font-size: 14px;
     padding: 8px 16px;
+  }
+
+  #typing-text {
+    font-size: 14px; /* Ukuran teks lebih kecil untuk layar ponsel */
+    text-align: center; /* Pastikan tetap di tengah */
+    white-space: normal; /* Izinkan teks berpindah baris */
+    padding-left: 30px; /* Atur padding agar tidak terlalu lebar */
+    display: inline-block;
   }
 }
 

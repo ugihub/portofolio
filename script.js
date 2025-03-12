@@ -9,9 +9,9 @@ burger.addEventListener("click", () => {
 // Daftar teks yang akan ditampilkan
 const texts = [
   "First-year student exploring programming.",
-  "Building logic and creating with Greenfoot and websites.",
-  "Passionate about learning and growing with code.",
-  "Blending creativity and logic through technology.",
+  "Creating with Greenfoot and websites.",
+  "Learning and growing with code and logic.",
+  "Blending creativity and logic seamlessly.",
 ];
 
 // Elemen tempat teks akan ditampilkan
