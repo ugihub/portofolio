@@ -146,7 +146,7 @@ nav a:hover {
   max-width: 600px;
   z-index: 1; /* Ensure text stays above background decorations */
   text-align: start;
-  margin-left: 5em;
+  margin-left: 8em;
 }
 
 .hero h1 {
@@ -179,7 +179,7 @@ nav a:hover {
 }
 
 .hero-image img:hover {
-  transform: scale(1.05);
+  transform: scale(1.5);
 }
 
 .cta-button {
@@ -199,6 +199,58 @@ nav a:hover {
 .cta-button:hover {
   background: var(--secondary-accent);
   transform: scale(1.1);
+}
+
+/* Styling for Photo */
+.photo-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.photo {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%; /* Membuat lingkaran */
+  overflow: hidden;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.9; /* Efek transparan */
+}
+
+.photo:hover {
+  transform: scale(1.1); /* Efek zoom */
+}
+
+.photo-container::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3), transparent);
+  border-radius: 50%;
+  animation: pulsate 2s infinite ease-in-out;
+}
+
+@keyframes pulsate {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
 }
 
 /* Feather Splash Styles */
