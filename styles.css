@@ -146,7 +146,7 @@ nav a:hover {
   max-width: 600px;
   z-index: 1; /* Ensure text stays above background decorations */
   text-align: start;
-  margin-left: 8em;
+  margin-left: 18em;
 }
 
 .hero h1 {
