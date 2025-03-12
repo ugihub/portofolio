@@ -8,10 +8,10 @@ burger.addEventListener("click", () => {
 
 // Daftar teks yang akan ditampilkan
 const texts = [
-  "I'm a new programmer.",
-  "I create stunning websites.",
-  "I create game in greenfoot.",
-  "Let's build Together!",
+  "First-year student exploring programming and web development.",
+  "Building logic and creating with Greenfoot and websites.",
+  "Passionate about learning and growing with code.",
+  "Blending creativity and logic through technology.",
 ];
 
 // Fungsi untuk membuat efek ketik
