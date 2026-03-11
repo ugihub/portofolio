@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex Carter | Digital Designer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0a0a0a;
+            --secondary: #0f172a;
+            --accent: #3b82f6;
+            --accent-light: #60a5fa;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .font-jakarta {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        /* Hero Video Background */
+        .hero-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        /* Navigation */
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Project Cards */
+        .project-card {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(15, 23, 42, 0.4) 100%);
+            backdrop-filter: blur(10px);
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Skills Icons */
+        .skill-icon {
+            transition: all 0.3s ease;
+        }
+
+        .skill-icon:hover {
+            transform: scale(1.1);
+            color: var(--accent);
+        }
+
+        /* Gallery Items */
+        .gallery-item {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 35px;
+            cursor: pointer;
+        }
+
+        /* Contact Form */
+        .contact-input {
+            background-color: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .contact-input:focus {
+            border-color: var(--accent);
+            outline: none;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background-color: transparent;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: rgba(59, 130, 246, 0.1);
+        }
+
+        /* Section Titles */
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 120px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
+            margin: 15px 0;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease forwards;
+            opacity: 0;
+        }
+
+        .delay-100 {
+            animation-delay: 0.1s;
+        }
+
+        .delay-200 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-300 {
+            animation-delay: 0.3s;
+        }
+
+        .delay-400 {
+            animation-delay: 0.4s;
+        }
+
+        /* Parallax effect */
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        /* Mobile menu */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-content {
+                padding-top: 120px;
+            }
+
+            .section-title::after {
+                width: 80px;
+            }
+
+            .parallax {
+                background-attachment: scroll;
+            }
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-opacity-90 backdrop-blur-sm" style="background-color: rgba(10, 10, 10, 0.9);">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold font-jakarta text-white">
+                AC<span class="text-accent">.</span>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex space-x-8">
+                <a href="#about"
+                    class="nav-link text-sm uppercase tracking-wider text-gray-300 hover:text-white">About</a>
+                <a href="#work"
+                    class="nav-link text-sm uppercase tracking-wider text-gray-300 hover:text-white">Work</a>
+                <a href="#skills"
+                    class="nav-link text-sm uppercase tracking-wider text-gray-300 hover:text-white">Skills</a>
+                <a href="#gallery"
+                    class="nav-link text-sm uppercase tracking-wider text-gray-300 hover:text-white">Gallery</a>
+                <a href="#music"
+                    class="nav-link text-sm uppercase tracking-wider text-gray-300 hover:text-white">Music</a>
+                <a href="#contact"
+                    class="nav-link text-sm uppercase tracking-wider text-gray-300 hover:text-white">Contact</a>
+            </div>
+
+            <!-- Mobile menu button -->
+            <button id="mobile-menu-button" class="md:hidden text-gray-300 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                    </path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" 
+            class="mobile-menu fixed inset-y-0 right-0 w-64 bg-gray-900 bg-opacity-95 p-6 transform transition-transform duration-300 ease-in-out">
+            <div class="flex justify-end">
+                <button id="close-mobile-menu" class="text-gray-300 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="mt-10 flex flex-col space-y-6">
+                <a href="#about" class="text-lg text-gray-300 hover:text-white">About</a>
+                <a href="#work" class="text-lg text-gray-300 hover:text-white">Work</a>
+                <a href="#skills" class="text-lg text-gray-300 hover:text-white">Skills</a>
+                <a href="#gallery" class="text-lg text-gray-300 hover:text-white">Gallery</a>
+                <a href="#music" class="text-lg text-gray-300 hover:text-white">Music</a>
+                <a href="#contact" class="text-lg text-gray-300 hover:text-white">Contact</a>
+            </div>
+
+            <div class="mt-20 pt-6 border-t border-gray-800">
+                <p class="text-gray-400">Let's connect</p>
+                <div class="flex space-x-4 mt-4">
+                    <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-github"></i></a>
+                    <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-dribbble"></i></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden">
+        <video autoplay muted loop class="hero-video">
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-digital-background-1147-large.mp4"
+                type="video/mp4">
+        </video>
+
+        <div class="hero-content text-center px-6 z-10 animate-fade-in">
+            <h1 class="text-5xl md:text-7xl font-bold mb-4 font-jakarta">
+                <span class="text-white">ALEX</span>
+                <span class="text-accent">CARTER</span>
+            </h1>
+            <h2 class="text-xl md:text-2xl text-gray-300 mb-8 delay-100 animate-fade-in">DIGITAL DESIGNER & CREATIVE
+                DEVELOPER</h2>
+            <p class="max-w-2xl mx-auto text-gray-400 mb-10 text-lg delay-200 animate-fade-in">
+                Crafting immersive digital experiences that blend aesthetics with functionality.
+            </p>
+            <a href="#work"
+                class="btn-primary px-8 py-3 rounded-md text-sm uppercase tracking-wider delay-300 animate-fade-in inline-block">
+                Explore My Work
+            </a>
+        </div>
+
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 delay-400 animate-fade-in">
+            <a href="#about" class="text-gray-400 hover:text-white inline-block animate-bounce">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-6 max-w-6xl mx-auto">
+        <h2 class="section-title text-3xl font-bold mb-16 font-jakarta">
+            ABOUT <span class="text-accent">ME</span>
+        </h2>
+
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="animate-fade-in">
+                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80"
+                    alt="Alex Carter" class="rounded-lg shadow-xl w-full h-auto max-h-96 object-cover">
+            </div>
+
+            <div class="animate-fade-in delay-100">
+                <h3 class="text-2xl font-semibold mb-4">CREATIVE PROBLEM SOLVER</h3>
+                <p class="text-gray-400 mb-6">
+                    With over 8 years of experience in digital design and development, I specialize in creating visually
+                    stunning and highly functional digital experiences. My approach combines technical expertise with
+                    artistic vision to deliver solutions that resonate with users.
+                </p>
+                <p class="text-gray-400 mb-6">
+                    I've worked with startups and Fortune 500 companies alike, helping them translate their brand
+                    identity into compelling digital experiences. My work has been recognized by Awwwards, CSS Design
+                    Awards, and Behance.
+                </p>
+                <p class="text-gray-400 mb-8">
+                    When I'm not designing or coding, you can find me producing electronic music, experimenting with
+                    generative art, or exploring the intersection of technology and creativity.
+                </p>
+
+                <div class="flex flex-wrap gap-4">
+                    <div class="flex items-center">
+                        <span class="w-2 h-2 rounded-full bg-accent mr-2"></span>
+                        <span class="text-sm text-gray-400">UI/UX Design</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="w-2 h-2 rounded-full bg-accent mr-2"></span>
+                        <span class="text-sm text-gray-400">Frontend Development</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="w-2 h-2 rounded-full bg-accent mr-2"></span>
+                        <span class="text-sm text-gray-400">Creative Direction</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="w-2 h-2 rounded-full bg-accent mr-2"></span>
+                        <span class="text-sm text-gray-400">Motion Design</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work/Projects Section -->
+    <section id="work" class="py-20 px-6 bg-secondary">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="section-title text-3xl font-bold text-center mb-16 font-jakarta">
+                FEATURED <span class="text-accent">WORK</span>
+            </h2>
+
+            <div class="grid md:grid-cols-3 gap-8 mb-12">
+                <!-- Project 1 -->
+                <div class="project-card rounded-lg overflow-hidden animate-fade-in">
+                    <div class="relative overflow-hidden h-60">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                            alt="Project 1"
+                            class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">NOVA DASHBOARD</h3>
+                        <p class="text-gray-400 text-sm mb-4">A sleek analytics dashboard with real-time data
+                            visualization</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-accent">UI/UX DESIGN • DEVELOPMENT</span>
+                            <a href="#" class="text-gray-400 hover:text-white">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card rounded-lg overflow-hidden animate-fade-in delay-100">
+                    <div class="relative overflow-hidden h-60">
+                        <img src="https://images.unsplash.com/photo-1467232004584-a241de8b9a40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80"
+                            alt="Project 2"
+                            class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">ORBIT MOBILE APP</h3>
+                        <p class="text-gray-400 text-sm mb-4">Social networking app with AR integration</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-accent">PRODUCT DESIGN • PROTOTYPING</span>
+                            <a href="#" class="text-gray-400 hover:text-white">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card rounded-lg overflow-hidden animate-fade-in delay-200">
+                    <div class="relative overflow-hidden h-60">
+                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                            alt="Project 3"
+                            class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">AURORA DESIGN SYSTEM</h3>
+                        <p class="text-gray-400 text-sm mb-4">Comprehensive design system for enterprise applications
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-accent">DESIGN SYSTEMS • DOCUMENTATION</span>
+                            <a href="#" class="text-gray-400 hover:text-white">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center animate-fade-in delay-300">
+                <button id="view-more-projects"
+                    class="btn-primary px-8 py-3 rounded-md text-sm uppercase tracking-wider">
+                    VIEW FULL PORTFOLIO
+                </button>
+            </div>
+
+            <!-- Hidden projects that will be shown when clicking "View More" -->
+            <div id="more-projects" class="hidden grid md:grid-cols-3 gap-8 mt-12">
+                <!-- Additional projects would go here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills/Services Section -->
+    <section id="skills" class="py-20 px-6 max-w-6xl mx-auto">
+        <h2 class="section-title text-3xl font-bold text-center mb-16 font-jakarta">
+            MY <span class="text-accent">SKILLS</span>
+        </h2>
+
+        <div class="grid md:grid-cols-3 gap-12">
+            <!-- Skill 1 -->
+            <div class="text-center animate-fade-in">
+                <div class="skill-icon text-5xl mb-4 text-gray-300">
+                    <i class="fas fa-paint-brush"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-3">UI/UX DESIGN</h3>
+                <p class="text-gray-400">
+                    Crafting intuitive interfaces with a focus on user experience, accessibility, and visual appeal.
+                </p>
+            </div>
+
+            <!-- Skill 2 -->
+            <div class="text-center animate-fade-in delay-100">
+                <div class="skill-icon text-5xl mb-4 text-gray-300">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-3">FRONTEND DEVELOPMENT</h3>
+                <p class="text-gray-400">
+                    Building responsive, performant web applications with modern frameworks and best practices.
+                </p>
+            </div>
+
+            <!-- Skill 3 -->
+            <div class="text-center animate-fade-in delay-200">
+                <div class="skill-icon text-5xl mb-4 text-gray-300">
+                    <i class="fas fa-cube"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-3">3D & MOTION</h3>
+                <p class="text-gray-400">
+                    Creating immersive 3D experiences and smooth animations to enhance digital products.
+                </p>
+            </div>
+
+            <!-- Skill 4 -->
+            <div class="text-center animate-fade-in">
+                <div class="skill-icon text-5xl mb-4 text-gray-300">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-3">MOBILE DESIGN</h3>
+                <p class="text-gray-400">
+                    Designing native and hybrid mobile applications with platform-specific patterns in mind.
+                </p>
+            </div>
+
+            <!-- Skill 5 -->
+            <div class="text-center animate-fade-in delay-100">
+                <div class="skill-icon text-5xl mb-4 text-gray-300">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-3">DATA VISUALIZATION</h3>
+                <p class="text-gray-400">
+                    Transforming complex data into clear, engaging visual narratives and interactive dashboards.
+                </p>
+            </div>
+
+            <!-- Skill 6 -->
+            <div class="text-center animate-fade-in delay-200">
+                <div class="skill-icon text-5xl mb-4 text-gray-300">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-3">AI INTEGRATION</h3>
+                <p class="text-gray-400">
+                    Implementing AI and machine learning features to create smarter, more adaptive interfaces.
+                </p>
+            </div>
+        </div>
+
+        <div class="mt-16 animate-fade-in delay-300">
+            <h3 class="text-xl font-semibold text-center mb-6">TECHNOLOGIES I WORK WITH</h3>
+            <div class="flex flex-wrap justify-center gap-6">
+                <div class="flex items-center">
+                    <i class="fab fa-figma text-2xl text-gray-400 mr-2"></i>
+                    <span class="text-gray-400">Figma</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fab fa-react text-2xl text-gray-400 mr-2"></i>
+                    <span class="text-gray-400">React</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fab fa-js text-2xl text-gray-400 mr-2"></i>
+                    <span class="text-gray-400">JavaScript</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fab fa-css3-alt text-2xl text-gray-400 mr-2"></i>
+                    <span class="text-gray-400">CSS3</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fab fa-sass text-2xl text-gray-400 mr-2"></i>
+                    <span class="text-gray-400">Sass</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fab fa-node-js text-2xl text-gray-400 mr-2"></i>
+                    <span class="text-gray-400">Node.js</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fab fa-bootstrap text-2xl text-gray-400 mr-2"></i>
+                    <span class="text-gray-400">Bootstrap</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-cube text-2xl text-gray-400 mr-2"></i>
+                    <span class="text-gray-400">Three.js</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20 px-6 bg-secondary">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="section-title text-3xl font-bold text-center mb-16 font-jakarta">
+                VISUAL <span class="text-accent">GALLERY</span>
+            </h2>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <!-- Gallery Item 1 -->
+                <div class="gallery-item rounded-lg overflow-hidden animate-fade-in">
+                    <img src="https://images.unsplash.com/photo-1547036967-23d11aacaee0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80"
+                        alt="Gallery Image 1" class="w-full h-full object-cover cursor-pointer"
+                        onclick="openLightbox(this)">
+                </div>
+
+                <!-- Gallery Item 2 -->
+                <div class="gallery-item rounded-lg overflow-hidden animate-fade-in delay-100">
+                    <img src="https://images.unsplash.com/photo-1551218372-a1aedb9b95e6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80"
+                        alt="Gallery Image 2" class="w-full h-full object-cover cursor-pointer"
+                        onclick="openLightbox(this)">
+                </div>
+
+                <!-- Gallery Item 3 -->
+                <div class="gallery-item rounded-lg overflow-hidden animate-fade-in delay-200">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                        alt="Gallery Image 3" class="w-full h-full object-cover cursor-pointer"
+                        onclick="openLightbox(this)">
+                </div>
+
+                <!-- Gallery Item 4 -->
+                <div class="gallery-item rounded-lg overflow-hidden animate-fade-in delay-300">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                        alt="Gallery Image 4" class="w-full h-full object-cover cursor-pointer"
+                        onclick="openLightbox(this)">
+                </div>
+
+                <!-- Gallery Item 5 -->
+                <div class="gallery-item rounded-lg overflow-hidden animate-fade-in">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                        alt="Gallery Image 5" class="w-full h-full object-cover cursor-pointer"
+                        onclick="openLightbox(this)">
+                </div>
+
+                <!-- Gallery Item 6 -->
+                <div class="gallery-item rounded-lg overflow-hidden animate-fade-in delay-100">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                        alt="Gallery Image 6" class="w-full h-full object-cover cursor-pointer"
+                        onclick="openLightbox(this)">
+                </div>
+
+                <!-- Gallery Item 7 -->
+                <div class="gallery-item rounded-lg overflow-hidden animate-fade-in delay-200">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                        alt="Gallery Image 7" class="w-full h-full object-cover cursor-pointer"
+                        onclick="openLightbox(this)">
+                </div>
+
+                <!-- Gallery Item 8 -->
+                <div class="gallery-item rounded-lg overflow-hidden animate-fade-in delay-300">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                        alt="Gallery Image 8" class="w-full h-full object-cover cursor-pointer"
+                        onclick="openLightbox(this)">
+                </div>
+            </div>
+
+            <div class="text-center mt-12 animate-fade-in delay-400">
+                <button class="btn-primary px-8 py-3 rounded-md text-sm uppercase tracking-wider">
+                    VIEW MORE VISUALS
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Music Section -->
+    <section id="music" class="py-20 px-6 max-w-6xl mx-auto">
+        <h2 class="section-title text-3xl font-bold text-center mb-16 font-jakarta">
+            MY <span class="text-accent">MUSIC</span>
+        </h2>
+
+        <div class="grid md:grid-cols-2 gap-12">
+            <div class="animate-fade-in">
+                <h3 class="text-xl font-semibold mb-6">LATEST RELEASES</h3>
+
+                <!-- Track 1 -->
+                <div class="flex items-center mb-6 p-4 rounded-lg hover:bg-gray-800 transition-colors">
+                    <div class="w-16 h-16 bg-gray-700 rounded-md mr-4 flex-shrink-0 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1496293455970-f8581aae0e3b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1413&q=80"
+                            alt="Album Cover" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-grow">
+                        <h4 class="font-medium">NEON DREAMS</h4>
+                        <p class="text-sm text-gray-400">Synthwave • 2023</p>
+                    </div>
+                    <button
+                        class="w-10 h-10 rounded-full bg-accent bg-opacity-20 text-accent flex items-center justify-center hover:bg-opacity-30 transition-all">
+                        <i class="fas fa-play"></i>
+                    </button>
+                </div>
+
+                <!-- Track 2 -->
+                <div class="flex items-center mb-6 p-4 rounded-lg hover:bg-gray-800 transition-colors">
+                    <div class="w-16 h-16 bg-gray-700 rounded-md mr-4 flex-shrink-0 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                            alt="Album Cover" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-grow">
+                        <h4 class="font-medium">MIDNIGHT DRIVE</h4>
+                        <p class="text-sm text-gray-400">Electronic • 2023</p>
+                    </div>
+                    <button
+                        class="w-10 h-10 rounded-full bg-accent bg-opacity-20 text-accent flex items-center justify-center hover:bg-opacity-30 transition-all">
+                        <i class="fas fa-play"></i>
+                    </button>
+                </div>
+
+                <!-- Track 3 -->
+                <div class="flex items-center mb-6 p-4 rounded-lg hover:bg-gray-800 transition-colors">
+                    <div class="w-16 h-16 bg-gray-700 rounded-md mr-4 flex-shrink-0 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80"
+                            alt="Album Cover" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-grow">
+                        <h4 class="font-medium">URBAN ECHOES</h4>
+                        <p class="text-sm text-gray-400">Ambient • 2022</p>
+                    </div>
+                    <button
+                        class="w-10 h-10 rounded-full bg-accent bg-opacity-20 text-accent flex items-center justify-center hover:bg-opacity-30 transition-all">
+                        <i class="fas fa-play"></i>
+                    </button>
+                </div>
+
+                <div class="mt-8">
+                    <a href="#" class="inline-flex items-center text-accent hover:text-white transition-colors">
+                        <span>VIEW ALL TRACKS</span>
+                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="animate-fade-in delay-100">
+                <h3 class="text-xl font-semibold mb-6">LISTEN ON SPOTIFY</h3>
+                <div class="bg-gray-800 rounded-xl p-6">
+                    <div class="flex items-center mb-6">
+                        <i class="fab fa-spotify text-3xl text-green-500 mr-4"></i>
+                        <div>
+                            <h4 class="font-medium">ALEX CARTER</h4>
+                            <p class="text-sm text-gray-400">Monthly Listeners: 12,345</p>
+                        </div>
+                    </div>
+
+                    <div class="aspect-w-16 aspect-h-9 bg-gray-700 rounded-lg overflow-hidden mb-6">
+                        <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                            alt="Spotify Playlist" class="w-full h-full object-cover">
+                    </div>
+
+                    <a href="#" class="btn-primary w-full py-3 rounded-md text-center">
+                        <i class="fab fa-spotify mr-2"></i> FOLLOW ON SPOTIFY
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-6 bg-secondary">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="section-title text-3xl font-bold text-center mb-16 font-jakarta">
+                GET IN <span class="text-accent">TOUCH</span>
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="animate-fade-in">
+                    <h3 class="text-xl font-semibold mb-6">CONTACT INFORMATION</h3>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="text-accent mr-4 mt-1">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium mb-1">EMAIL</h4>
+                                <a href="mailto:hello@alexcarter.design"
+                                    class="text-gray-400 hover:text-white transition-colors">hello@alexcarter.design</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="text-accent mr-4 mt-1">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium mb-1">PHONE</h4>
+                                <a href="tel:+11234567890" class="text-gray-400 hover:text-white transition-colors">+1
+                                    (123) 456-7890</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="text-accent mr-4 mt-1">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium mb-1">LOCATION</h4>
+                                <p class="text-gray-400">San Francisco, CA</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-10">
+                        <h4 class="font-medium mb-4">CONNECT WITH ME</h4>
+                        <div class="flex space-x-4">
+                            <a href="#"
+                                class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center text-gray-300 hover:bg-accent hover:text-white transition-all">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#"
+                                class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center text-gray-300 hover:bg-accent hover:text-white transition-all">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#"
+                                class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center text-gray-300 hover:bg-accent hover:text-white transition-all">
+                                <i class="fab fa-dribbble"></i>
+                            </a>
+                            <a href="#"
+                                class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center text-gray-300 hover:bg-accent hover:text-white transition-all">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="animate-fade-in delay-100">
+                    <h3 class="text-xl font-semibold mb-6">SEND A MESSAGE</h3>
+
+                    <form class="space-y-4">
+                        <div>
+                            <label for="name" class="block text-sm font-medium mb-1">NAME</label>
+                            <input type="text" id="name" class="contact-input w-full px-4 py-2 rounded-md">
+                        </div>
+
+                        <div>
+                            <label for="email" class="block text-sm font-medium mb-1">EMAIL</label>
+                            <input type="email" id="email" class="contact-input w-full px-4 py-2 rounded-md">
+                        </div>
+
+                        <div>
+                            <label for="subject" class="block text-sm font-medium mb-1">SUBJECT</label>
+                            <input type="text" id="subject" class="contact-input w-full px-4 py-2 rounded-md">
+                        </div>
+
+                        <div>
+                            <label for="message" class="block text-sm font-medium mb-1">MESSAGE</label>
+                            <textarea id="message" rows="4"
+                                class="contact-input w-full px-4 py-2 rounded-md"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-primary w-full py-3 rounded-md text-center mt-6">
+                            SEND MESSAGE
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 text-center">
+        <div class="max-w-6xl mx-auto">
+            <a href="#" class="text-2xl font-bold font-jakarta text-white mb-6 inline-block">
+                AC<span class="text-accent">.</span>
+            </a>
+
+            <div class="flex justify-center space-x-8 mb-8">
+                <a href="#about" class="text-gray-400 hover:text-white transition-colors">About</a>
+                <a href="#work" class="text-gray-400 hover:text-white transition-colors">Work</a>
+                <a href="#skills" class="text-gray-400 hover:text-white transition-colors">Skills</a>
+                <a href="#gallery" class="text-gray-400 hover:text-white transition-colors">Gallery</a>
+                <a href="#music" class="text-gray-400 hover:text-white transition-colors">Music</a>
+                <a href="#contact" class="text-gray-400 hover:text-white transition-colors">Contact</a>
+            </div>
+
+            <div class="flex justify-center space-x-6 mb-8">
+                <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                    <i class="fab fa-dribbble"></i>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                    <i class="fab fa-spotify"></i>
+                </a>
+            </div>
+
+            <p class="text-gray-500 text-sm">
+                © 2023 ALEX CARTER. ALL RIGHTS RESERVED.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <img id="lightbox-img" class="lightbox-content" src="" alt="Lightbox Image">
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const closeMobileMenu = document.getElementById('close-mobile-menu');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.add('open');
+        });
+
+        closeMobileMenu.addEventListener('click', () => {
+            mobileMenu.classList.remove('open');
+        });
+
+        // Close mobile menu when clicking on a link
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+            });
+        });
+
+        // View more projects
+        const viewMoreButton = document.getElementById('view-more-projects');
+        const moreProjects = document.getElementById('more-projects');
+
+        viewMoreButton.addEventListener('click', () => {
+            if (moreProjects.classList.contains('hidden')) {
+                moreProjects.classList.remove('hidden');
+                viewMoreButton.textContent = 'SHOW LESS';
+
+                // Add animation to newly shown projects
+                const projectItems = moreProjects.querySelectorAll('.project-card');
+                projectItems.forEach((item, index) => {
+                    item.style.animation = `fadeIn 0.5s ease forwards ${index * 0.1}s`;
+                    item.style.opacity = '0';
+                });
+            } else {
+                moreProjects.classList.add('hidden');
+                viewMoreButton.textContent = 'VIEW FULL PORTFOLIO';
+            }
+        });
+
+        // Lightbox functionality
+        function openLightbox(element) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+
+            lightboxImg.src = element.src;
+            lightbox.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close lightbox when clicking outside the image
+        window.addEventListener('click', (event) => {
+            const lightbox = document.getElementById('lightbox');
+            if (event.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Animate elements when they come into view
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.animate-fade-in');
+
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.2;
+
+                if (elementPosition < screenPosition) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+    </script>
+</body>
+
+</html>
